@@ -113,7 +113,8 @@ resource "google_compute_forwarding_rule" "default-forwarding-rule" {
   load_balancing_scheme = var.load_balancing_scheme
   ports                 = [var.healthcheck_port]
 	project								= var.subnetwork_project
-	
+	region    						= var.region
+
   backend_service       = google_compute_region_backend_service.default_region_backend_service.self_link
   subnetwork            = data.google_compute_subnetwork.default-subnetwork.self_link
 }
