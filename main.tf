@@ -4,6 +4,7 @@ resource "google_compute_instance" "default" {
   machine_type   = var.compute_type
   zone           = element(var.compute_zones, count.index)
   can_ip_forward = var.can_ip_forward
+	project				 = var.compute_project
 
   boot_disk {
     initialize_params {
