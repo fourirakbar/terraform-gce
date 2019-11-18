@@ -50,13 +50,13 @@ resource "google_compute_instance_group" "default-instance-group" {
   name      = format("%s-%s-group-%d", var.instance_name_header, var.compute_name, count.index + 1)
   # instances = ["${google_compute_instance.default.*.self_link}"]
   
-	instances = matchkeys(google_compute_instance.default.*.self_link, google_compute_instance.default.*.zone, list(element(var.compute_zones, count.index)))
+	instances = matchkeys(google_compute_instance.default.self_link, google_compute_instance.default.zone, list(element(var.compute_zones, count.index)))
 
 	# instances = matchkeys(google_compute_instance.default.*.self_link)
   #zone = "${var.compute_zone}"
   zone      = element(google_compute_instance.default.*.zone, count.index)
 	project		= var.compute_project
-	size			= 1
+	# size			= 1
 
   lifecycle {
     create_before_destroy = true
