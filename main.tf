@@ -22,7 +22,7 @@ resource "google_compute_instance" "default" {
     subnetwork_project = var.subnetwork_project
   }
 
-  labels {
+  labels = {
     environment        = var.environment
     service_group      = var.service_group
     service_name       = var.service_name
