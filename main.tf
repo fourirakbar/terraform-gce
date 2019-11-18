@@ -65,6 +65,7 @@ resource "google_compute_region_backend_service" "default_region_backend_service
   timeout_sec      = 10
   session_affinity = "NONE"
   connection_draining_timeout_sec = "120"
+	project					 = var.compute_project
 
   backend {
 		group = element(matchkeys(google_compute_instance_group.default-instance-group.*.self_link, google_compute_instance_group.default-instance-group.*.zone, list(element(var.compute_zones, 0))),0)
@@ -88,7 +89,7 @@ resource "google_compute_health_check" "default-health-check" {
   healthy_threshold     = var.healthy_threshold
   unhealthy_threshold   = var.unhealthy_threshold
 	project								= var.compute_project
-	
+
   tcp_health_check {
     port         = var.healthcheck_port
   }
