@@ -174,3 +174,7 @@ variable "region" {
 variable "load_balancing_scheme" {
   default = ""
 }
+
+variable "compute_project" {
+  default = ""
+}
