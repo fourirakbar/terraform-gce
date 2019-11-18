@@ -170,3 +170,7 @@ variable "unhealthy_threshold" {
 variable "region" {
   default = ""
 }
+
+variable "load_balancing_scheme" {
+  default = ""
+}

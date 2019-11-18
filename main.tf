@@ -43,8 +43,9 @@ resource "google_compute_instance" "default" {
 }
 
 resource "google_compute_instance_group" "default-instance-group" {
-  count     = min(google_compute_instance.default.count, length(var.compute_zones))
-  #name  = "${var.instance_name_header}-${var.compute_name}-group-${var.count_start}"
+  # count     = min(google_compute_instance.default.count, length(var.compute_zones))
+  count			= min(length(google_compute_instance.default))
+
   name      = format("%s-%s-group-%d", var.instance_name_header, var.compute_name, count.index + 1)
   #instances = ["${google_compute_instance.default.*.self_link}"]
   instances = matchkeys(google_compute_instance.default.*.self_link, google_compute_instance.default.*.zone, list(element(var.compute_zones, count.index)))
