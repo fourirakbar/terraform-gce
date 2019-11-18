@@ -52,6 +52,7 @@ resource "google_compute_instance_group" "default-instance-group" {
   instances = matchkeys(google_compute_instance.default.*.self_link, google_compute_instance.default.*.zone, list(element(var.compute_zones, count.index)))
   #zone = "${var.compute_zone}"
   zone      = element(google_compute_instance.default.*.zone, count.index)
+	project		= var.compute_project
 
   lifecycle {
     create_before_destroy = true
@@ -86,7 +87,8 @@ resource "google_compute_health_check" "default-health-check" {
   timeout_sec           = var.timeout_sec
   healthy_threshold     = var.healthy_threshold
   unhealthy_threshold   = var.unhealthy_threshold
-
+	project								= var.compute_project
+	
   tcp_health_check {
     port         = var.healthcheck_port
   }
