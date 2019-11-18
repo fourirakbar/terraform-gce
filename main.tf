@@ -66,6 +66,7 @@ resource "google_compute_region_backend_service" "default_region_backend_service
   session_affinity = "NONE"
   connection_draining_timeout_sec = "120"
 	project					 = var.compute_project
+	region					 = var.region
 
   backend {
 		group = element(matchkeys(google_compute_instance_group.default-instance-group.*.self_link, google_compute_instance_group.default-instance-group.*.zone, list(element(var.compute_zones, 0))),0)
